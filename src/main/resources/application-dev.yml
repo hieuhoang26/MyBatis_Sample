@@ -1,0 +1,50 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+  devtools:
+    add-properties: true
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3308}/${DB_NAME:notification_db}
+    username: ${DB_USER:user}
+    password: ${DB_PASSWORD:pass}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  flyway:
+    locations: classpath:db/migration
+    enabled: true
+    baseline-version: 1
+    baseline-on-migrate: false
+
+mybatis:
+  type-aliases-package: vn.hhh.noti.Model
+#  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+aws:
+  s3:
+    bucket-name: noti-demo1
+  region: us-east-1
+  credentials:
+    accessKey: ${AWS_ACCESS_KEY_ID}
+    secretKey: ${AWS_SECRET_ACCESS_KEY}
+  sqs:
+    queue-url: https://sqs.us-east-1.amazonaws.com/390402567579/noti-demo
+
+
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+
+open-api:
+  service:
+    api-docs: demo
+    server: ${SWAGGER_ENDPOINT:http://localhost:8080}
+    title: Api
+    version: 1.0
+
+logging:
+  level:
+    org.springframework.messaging: DEBUG
