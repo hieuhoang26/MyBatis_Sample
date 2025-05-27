@@ -11,30 +11,15 @@ import java.util.List;
 @Mapper
 public interface NotificationMapper {
 
-    final String GET_ALL = "SELECT * FROM notifications";
+    List<Notification> findAll(@Param("limit") int limit, @Param("offset") int offset);
 
-    final String GET_ID = "SELECT * FROM notifications n WHERE n.id = #{id}";
+    Notification getById(@Param("id") Integer id);
 
-    final String INSERT = "INSERT INTO notifications (title, image_url, content, status) " +
-            "VALUES (#{title}, #{imageUrl}, #{content}, #{status})";
-    final String DELETE_ID = "DELETE FROM notifications n WHERE n.id = #{id}";
-
-    final String CHANGE_STATUS = "UPDATE notifications  SET status = #{status}, pushed_at = #{push_at} WHERE id = #{id}";
-
-    @Select(GET_ALL)
-    List<Notification> findAll();
-
-    @Select(GET_ID)
-    Notification getById(Integer id);
-
-    @Insert(INSERT)
-    @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(Notification notification);
 
-    @Delete(DELETE_ID)
-    void deleteById(Integer id);
+    void deleteById(@Param("id") Integer id);
 
-    @Update(CHANGE_STATUS)
-    void changeStatus(Integer id, Status status, LocalDateTime push_at);
+    void changeStatus(@Param("id") Integer id, @Param("status") Status status, @Param("push_at") LocalDateTime push_at);
+
 
 }

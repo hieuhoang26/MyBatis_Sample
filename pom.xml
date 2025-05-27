@@ -124,7 +124,12 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.19.0</version>
         </dependency>
-<!--&lt;!&ndash;        env&ndash;&gt;-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+        </dependency>
+
+        <!--&lt;!&ndash;        env&ndash;&gt;-->
 <!--        &lt;!&ndash; https://mvnrepository.com/artifact/io.github.cdimascio/dotenv-java &ndash;&gt;-->
 <!--        <dependency>-->
 <!--            <groupId>io.github.cdimascio</groupId>-->

@@ -7,6 +7,26 @@
 
     <select id="findAll" resultType="vn.hhh.noti.model.Notification">
         SELECT * FROM notifications
+                          LIMIT #{limit} OFFSET #{offset}
     </select>
+
+    <select id="getById" resultType="vn.hhh.noti.model.Notification">
+        SELECT * FROM notifications WHERE id = #{id}
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO notifications (title, image_url, content, status)
+        VALUES (#{title}, #{imageUrl}, #{content}, #{status})
+    </insert>
+
+    <delete id="deleteById">
+        DELETE FROM notifications WHERE id = #{id}
+    </delete>
+
+    <update id="changeStatus">
+        UPDATE notifications
+        SET status = #{status}, pushed_at = #{push_at}
+        WHERE id = #{id}
+    </update>
 
 </mapper>

@@ -27,10 +27,9 @@ public class NotificationServiceImp implements NotificationService {
     private final SqsService sqsService;
     private final ObjectMapper objectMapper;
 
-
     @Override
-    public List<Notification> getAllNoti() {
-        return notificationMapper.findAll();
+    public List<Notification> getAllNoti(int limit, int offset) {
+        return notificationMapper.findAll(limit, offset);
     }
 
     @Override

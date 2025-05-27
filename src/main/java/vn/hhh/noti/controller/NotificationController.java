@@ -21,13 +21,15 @@ public class NotificationController {
 
     @Operation(summary = "Get All", description = "Return list ")
     @GetMapping(value = "/all")
-    public ResponseData<?> getAll() {
+    public ResponseData<?> getAll(@RequestParam(defaultValue = "10") int limit,
+                                  @RequestParam(defaultValue = "0") int offset) {
         try {
-            return new ResponseData<>(HttpStatus.OK.value(), "Get All", notificationService.getAllNoti());
+            return new ResponseData<>(HttpStatus.OK.value(), "Get All", notificationService.getAllNoti(limit, offset));
         } catch (Exception e) {
             return new ResponseError(HttpStatus.BAD_REQUEST.value(), e.getMessage());
         }
     }
+
     @Operation(summary = "Get By Id ", description = "Return list ")
     @GetMapping()
     public ResponseData<?> getById(@RequestParam Integer id) {
@@ -37,32 +39,35 @@ public class NotificationController {
             return new ResponseError(HttpStatus.BAD_REQUEST.value(), e.getMessage());
         }
     }
+
     @Operation(summary = "Insert ", description = "Insert ")
     @PostMapping()
     public ResponseData<?> insert(@ModelAttribute NotificationRequest notification) {
         try {
 
-            return new ResponseData<>(HttpStatus.CREATED.value(), "Insert success" ,notificationService.insert(notification));
+            return new ResponseData<>(HttpStatus.CREATED.value(), "Insert success", notificationService.insert(notification));
         } catch (Exception e) {
             return new ResponseError(HttpStatus.BAD_REQUEST.value(), e.getMessage());
         }
     }
+
     @Operation(summary = "Change Status (Push) ", description = " ")
     @PatchMapping()
     public ResponseData<?> Push(@RequestParam Integer id) {
         try {
             notificationService.push(id);
-            return new ResponseData<>(HttpStatus.NO_CONTENT.value(), "push success" );
+            return new ResponseData<>(HttpStatus.NO_CONTENT.value(), "push success");
         } catch (Exception e) {
             return new ResponseError(HttpStatus.BAD_REQUEST.value(), e.getMessage());
         }
     }
+
     @Operation(summary = "Delete By Id ", description = " ")
     @DeleteMapping("/{id}")
     public ResponseData<?> delete(@PathVariable Integer id) {
         try {
             notificationService.delete(id);
-            return new ResponseData<>(HttpStatus.RESET_CONTENT.value(), "delete success" );
+            return new ResponseData<>(HttpStatus.RESET_CONTENT.value(), "delete success");
         } catch (Exception e) {
             return new ResponseError(HttpStatus.BAD_REQUEST.value(), e.getMessage());
         }
