@@ -10,11 +10,12 @@ import vn.hhh.noti.dto.ResponseData;
 import vn.hhh.noti.dto.ResponseError;
 import vn.hhh.noti.service.NotificationService;
 import vn.hhh.noti.utils.Status;
+import vn.hhh.noti.utils.Uri;
 
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "User Controller")
-@RequestMapping("/api/v1/noti")
+@RequestMapping(Uri.NOTI)
 public class NotificationController {
 
     final NotificationService notificationService;
