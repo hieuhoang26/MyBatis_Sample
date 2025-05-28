@@ -8,3 +8,7 @@ CREATE TABLE users (
                       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                       updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+INSERT INTO users (username, password, role, is_active)
+VALUES
+    ('admin', '$2a$10$0.B13Sfty9nMwbRAcyKbNO3JvAKnVZ0dWMFRRqtbQd8Shsw7KAEly', 'ADMIN', TRUE),
+    ('normal', '$2a$10$0.B13Sfty9nMwbRAcyKbNO3JvAKnVZ0dWMFRRqtbQd8Shsw7KAEly', 'USER', TRUE);
