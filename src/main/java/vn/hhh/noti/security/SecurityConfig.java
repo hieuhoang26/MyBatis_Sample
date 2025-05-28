@@ -53,7 +53,8 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)  // Disabling CSRF
                 .authorizeHttpRequests((request) -> {
-                    request.requestMatchers("/**").permitAll()
+                    request
+//                            .requestMatchers("/**").permitAll()
                             .requestMatchers(Uri.NOTI).hasRole("ADMIN")
                             .anyRequest().authenticated();
                 })
